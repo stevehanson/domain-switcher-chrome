@@ -3,15 +3,16 @@
 function checkForValidUrl(tabId, changeInfo, tab) {
   // If the letter 'g' is found in the tab's URL...
   if(tab.url.indexOf("plantour") > -1) {
-  	chrome.pageAction.show(tabId);
+	chrome.pageAction.show(tabId);
 		chrome.pageAction.setTitle({
 			tabId: tab.id,
 			title: "url: " + tab.url
 		});
-		chrome.pageAction.setPopup({tabId: tab.id, popup: 'popup.html'});	
+		chrome.pageAction.setPopup({tabId: tab.id, popup: 'popup.html'});
   }
   
 }
+
 
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
 

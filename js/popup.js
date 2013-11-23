@@ -4,7 +4,7 @@ $(document).ready(function() {
 		url = $(this).text();
 		console.log("Clicked url: " + url);
 		// chrome.tabs.getCurrent(function(tab) {
-		// 	chrome.tabs.update(tab.id, {url: url});
+		//	chrome.tabs.update(tab.id, {url: url});
 		// });
 
 		// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -14,10 +14,15 @@ $(document).ready(function() {
 		// });
 
 		chrome.runtime.sendMessage({url: url}, function(response) {
-		  console.log("response received");
+			console.log("response received");
 		});
 
 
+	});
+
+	$('#settings').click(function(e) {
+		chrome.tabs.create({'url': chrome.extension.getURL("options.html") } );
+		e.preventDefault();
 	});
 
 });

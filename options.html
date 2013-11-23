@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>Domain Switcher</title>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <!-- <link href="assets/lib/bootstrap/css/bootstrap.css" rel="stylesheet"> -->
+    <link href="css/bootstrap-3.0.2.min.css" rel="stylesheet">
+    <link href="css/settings.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <header class="container">
+      <div id="heading" class="masthead">
+        
+        <h2>Domain Switcher <small>Settings</small></h2>
+      </div>
+
+      <p>
+        Domain Switcher allows you to organize the environments (e.g. dev, uat, prod) for the various pojects you work on. Simply create a record below for your project and enter the domains for the various urls you work with. We'll do the rest, and you'll be able to simply switch between environments by clicking the arrow icon in your address bar when you are on a page that matches a URL you entered.
+      </p>
+   </header>
+   
+   <section class="main container">
+     <div class="row">
+    	<div class="col-md-12">
+	   		<p class="lead">Modfiy settings</p>
+	   		
+	   	</div> 
+     
+     </div>
+   	
+   	<div class="row">
+   		<div class="col-md-12">
+   		
+   			<form role="form" id="chatForm" ng-controller="FormCtrl" ng-submit="sendMessage(chat)">
+         
+  			 
+  			  <div class="form-group" id="fg-1">
+  			    <label for="message">Environment Domains - comma separated</label>
+  			    <input type="text" class="form-control" placeholder="Eg: http://localhost:3000/pets, http://test.pets.com, http://pets.com">
+  			  </div>
+          <a href="#" class="btn btn-primary add-button" role="button"><span class="glyphicon glyphicon-plus-sign"></span> Add project</a>
+   			</form>
+   		
+   		</div>
+   	
+   	</div>
+<br>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">PlanTour</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3">
+                <input type="text" class="form-control" value="http://plantour.dev">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" value="http://uat.plantour.com">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" value="http://plantour.com">
+              </div>
+              <div class="col-md-3">
+                <a href="#" class="btn btn-primary add-button" role="button"><span class="glyphicon glyphicon-plus-sign"></span> Add env</a>
+              </div>
+            </div>
+          </div> <!-- panel-body -->
+        </div> <!-- panel -->
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">Pets</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" value="localhost:3000/pets">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" value="test.pets.com">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" value="validate.pets.com">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" value="stg.pets.com">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" value="pets.com">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                <a httpref="#" class="btn btn-primary add-button" role="button"><span class="glyphicon glyphicon-plus-sign"></span> Add env</a>
+                </div>
+              </div>
+            </div>
+          </div> <!-- panel-body -->
+        </div> <!-- panel -->
+
+      </div>
+    </div>
+   	
+ 
+   
+   </section>
+   
+  
+    <!-- 3rd party -->
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/options.js"></script>
+
+  </body>
+</html>
