@@ -25,6 +25,10 @@
 
   "permissions": [
     "tabs", "http://*/*" , "https://*/*"
+  ],
+
+  "web_accessible_resources": [
+    "js/jquery-2.0.3.min.map"
   ]
 
 
