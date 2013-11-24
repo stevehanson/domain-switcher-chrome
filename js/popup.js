@@ -1,8 +1,32 @@
+
+// chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+//     var url = tabs[0].url;
+//     console.log('URL from popup::::::::: ');
+//     console.log(url);
+// });
+
+// chrome.tabs.getSelected(null,function(tab) {
+//     var tablink = tab.url;
+//     console.log('URL from popup::::::::: ');
+//     console.log(tablink);
+// });
+
+// var url = null;
+// chrome.windows.getCurrent(function(win) {
+//     chrome.tabs.query({'windowId': win.id, 'active': true}, function(tabs){
+//           url = tabs[0].url;
+// 		  console.log('URL from popup::::::::: ');
+//     	  console.log(url);
+//     });
+//   });
+
 $(document).ready(function() {
+
+	//console.log("PAGE LOADED::: " + url);
 
 	$('ul.domains li').click(function() {
 		url = $(this).text();
-		console.log("Clicked url: " + url);
+		//console.log("Clicked url: " + url);
 		// chrome.tabs.getCurrent(function(tab) {
 		//	chrome.tabs.update(tab.id, {url: url});
 		// });
@@ -14,7 +38,7 @@ $(document).ready(function() {
 		// });
 
 		chrome.runtime.sendMessage({url: url}, function(response) {
-			console.log("response received");
+			console.log("response received " + url);
 		});
 
 
@@ -27,3 +51,45 @@ $(document).ready(function() {
 
 });
 
+var app = angular.module('angOptions', []);
+
+
+app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
+	$scope.projects = JSON.parse(localStorage['domainSwitcher']);
+	console.log('----------------angular init-----------');
+	//$scope.envs = getEnvsForCurrentUrl(document.URL);
+	//$scope.envs = ['plantour.dev', 'uat2.plantour.com'];
+	
+
+	$scope.getEnvsForCurrentUrl = function(currentUrl) {
+		console.log('herererer');
+		var found = false;
+		var projects = $scope.projects;
+		var currentUrl = new Uri(currentUrl);
+		projects.forEach(function(project) {
+			if(found) return false; // break
+			project.envs.forEach(function(env) {
+				env = new Uri(env.url);
+				console.log('checking ' + env.host());
+				if(env.host() == currentUrl.host()) {
+					console.log("host matched " + env.host());
+
+					found = project.envs.map(function(env){ 
+						if(env.url) // not empty or null 
+							return env.url; 
+					}).filter(function(env) {
+						return (env); // filter out empty or null
+					});
+					return false; // break
+				}
+			});
+		});
+		console.log('done');
+		console.log(found);
+		console.log('done done');
+		return found;
+	};
+
+	$scope.envs = $scope.getEnvsForCurrentUrl();
+    
+}]);
