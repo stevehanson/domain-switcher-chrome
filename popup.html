@@ -4,20 +4,17 @@
     <title>Domain Switcher Extension</title>
     <link href="css/bootstrap-3.0.2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/popup.css">
-
-    
-  
   </head>
-  <body>
+  <body ng-controller="UrlsCtrl">
 
     <h4>Switch Domain</h4>
-    <ul class="domains" ng-controller="UrlsCtrl">
-      <li ng-repeat="env in envs">{{env}}</li>
+    <ul class="domains">
+      <li ng-repeat="env in envs" ng-click="selectEnv(env)">{{env}}</li>
     </ul>
 
     <hr>
     
-    <a id="settings" href="#">Settings</a>
+    <a id="settings" href="#" ng-click="loadSettings()">Settings</a>
 
     <script src="js/vendor/jquery-2.0.3.min.js"></script>
     <script src="js/vendor/jsuri-1.1.1.min.js"></script>

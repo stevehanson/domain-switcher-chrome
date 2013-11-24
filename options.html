@@ -37,9 +37,16 @@
 
         <div class="projects-list">
             <div ng-repeat="project in projects" class="panel panel-primary" ng-class="{'panel-default': project.enabled}">
-                <div class="panel-heading">
-                    {{project.name}}
-                    <a href="#" class="panel-heading-link" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove pull-right"></span></a>
+                <div class="panel-heading" ng-mouseenter="project.showEdit = true" ng-mouseleave="project.showEdit = false">
+                    <span ng-hide="project.editMode">{{project.name}}</span>
+                    
+                    <span ng-show="project.editMode">
+                        <input type="text" ng-model="project.name"/>
+                        <button class="btn btn-small btn-primary" ng-click="doneEditName(project)">Update</button>
+                    </span>
+                    
+                    <a href="#" class="panel-heading-link pull-right rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a href="#" class="panel-heading-link pull-right" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -69,6 +76,7 @@
             <button type="button" class="btn btn-primary" ng-click="save()" role="button">
                 <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save
             </button>
+            <span class="alert alert-success alert-small is-hidden" id="save-success">Save successful</span>
         </div>
     </div>
  

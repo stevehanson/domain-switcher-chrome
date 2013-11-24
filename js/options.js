@@ -57,7 +57,7 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 	};
 
 	$scope.addProject = function(project) {
-		$scope.projects.unshift({ name: 'New Project', envs: [ { url: '' }]});
+		$scope.projects.unshift({ name: 'New Project', editMode: true, envs: [ { url: '' }]});
 	};
 
 	$scope.removeProject = function($index) {
@@ -67,7 +67,15 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 
 	$scope.save = function() {
 		localStorage['domainSwitcher'] = JSON.stringify($scope.projects);
-		localStorageService.add('data', JSON.stringify($scope.projects));
+		$('#save-success').fadeIn().delay(1000).fadeOut();
+	};
+
+	$scope.editName = function(project){
+		project.editMode = true;
+	};
+
+	$scope.doneEditName = function(project){
+		project.editMode = false;
 	};
     
 }]);

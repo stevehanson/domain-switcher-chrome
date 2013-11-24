@@ -5,12 +5,12 @@
   "description": "This extension facilitates web development by allowing the user to easily switch domains on specified URLs",
   "version": "1.0",
   "options_page": "options.html",
-  "content_scripts": [
-    {
-      "matches": ["http://*/*","https://*/*"],
-      "js": ["js/vendor/jquery-2.0.3.min.js", "js/vendor/jsuri-1.1.1.min.js", "js/popup.js"],
-      "all_frames":true
-  }],
+  // "content_scripts": [
+  //   {
+  //     "matches": ["http://*/*","https://*/*"],
+  //     "js": ["js/vendor/jquery-2.0.3.min.js", "js/vendor/jsuri-1.1.1.min.js", "js/popup.js"],
+  //     "all_frames":true
+  // }],
 
   "background": {
     "scripts": [ "js/vendor/jsuri-1.1.1.min.js", "background.js" ]

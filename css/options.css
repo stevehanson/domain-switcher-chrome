@@ -1,3 +1,24 @@
 a.panel-heading-link {
 	color: white;
 }
+
+.ng-hide {
+	display: none !important;
+}
+
+a.rem-proj {
+  margin-left: 15px;
+}
+
+.alert.alert-small {
+	margin-top: 5px;
+	padding: 5px 10px;
+}
+
+#save-success {
+	margin-left: 15px;;
+}
+
+.is-hidden {
+	display: none;
+}
