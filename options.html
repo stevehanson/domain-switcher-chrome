@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Domain Switcher</title>
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-    <!-- <link href="assets/lib/bootstrap/css/bootstrap.css" rel="stylesheet"> -->
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link href="css/bootstrap-3.0.2.min.css" rel="stylesheet">
     <link href="css/options.css" rel="stylesheet">
   </head>
@@ -19,6 +18,8 @@
       <p>
         Domain Switcher allows you to organize the environments (e.g. dev, uat, prod) for the various pojects you work on. Simply create a record below for your project and enter the domains for the various urls you work with. We'll do the rest, and you'll be able to simply switch between environments by clicking the arrow icon in your address bar when you are on a page that matches a URL you entered.
       </p>
+
+      <p>It is recommended you leave off "http://" as it will be ignored anyway.</p>
    </header>
    
    <section class="main container" ng-controller="ProjectsCtrl">
@@ -89,8 +90,6 @@
    
 </section>
    
-  
-    <!-- 3rd party -->
     <script src="js/vendor/jquery-2.0.3.min.js"></script>
     <script src="js/vendor/angular.min.js"></script>
     <script src="js/options.js"></script>

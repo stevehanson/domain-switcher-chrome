@@ -25,7 +25,7 @@ function getEnvsForCurrentUrl(projects, currentUrl) {
 			if(urlsMatch(currUrl, env)) {
 				found = project.envs.map(function(env){ 
 					if(env.url) // not empty or null 
-						return env.url; 
+						return env; 
 				}).filter(function(env) {
 					return (env); // filter out empty or null
 				});
@@ -60,5 +60,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		var uri = new Uri(tabs[0].url);
 		uri.host(request.url);
     chrome.tabs.update(tabs[0].id, {url: uri.toString()});
+    return "1";
   });
 });

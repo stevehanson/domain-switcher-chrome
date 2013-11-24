@@ -8,13 +8,12 @@
   <body ng-controller="UrlsCtrl">
 
     <h4>Switch Domain</h4>
-    <ul class="domains">
-      <li ng-repeat="env in envs" ng-click="selectEnv(env)">{{env}}</li>
-    </ul>
-
-    <hr>
+    <div class="list-group domains">
+      <a ng-repeat="env in envs" ng-click="selectEnv(env.url)" class="list-group-item" ng-class="{active: env.active}">{{env.url}}</a>
+    </div>
     
-    <a id="settings" href="#" ng-click="loadSettings()">Settings</a>
+    <a class="pull-right" id="settings" href="#" ng-click="loadSettings()"><span class="glyphicon glyphicon-wrench"></span> Options</a>
+    <div class="clearfix"></div>
 
     <script src="js/vendor/jquery-2.0.3.min.js"></script>
     <script src="js/vendor/jsuri-1.1.1.min.js"></script>
