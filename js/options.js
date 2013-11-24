@@ -9,7 +9,12 @@ app.filter('reverse', function() {
 
 
 app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
-	$scope.projects = JSON.parse(localStorage['domainSwitcher']);
+	var data = localStorage['domainSwitcher'];
+	if(data != null) {
+		$scope.projects = JSON.parse(data);	
+	} else {
+		$scope.projects = [];
+	}
 
 	$scope.addEnv = function(project) {
 		project.envs.push({url: ''});

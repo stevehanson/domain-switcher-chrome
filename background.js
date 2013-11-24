@@ -51,7 +51,6 @@ function urlsMatch(currUrl, match) {
 	if(currUrl.path() === '') {
 		currUrl.path('/'); // in case '/' added in options page, will still match 
 	}
-	console.log("checking current url " + currUrl.toString() + " for match with " + match.toString());
 	return (currUrl.toString().indexOf(match.toString()) === 0);
 
 }

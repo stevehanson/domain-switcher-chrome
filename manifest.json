@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Domain Switcher",
   "description": "Simplify web development by easily switching domains between specified URL groups.",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "options_page": "options.html",
   "icons": { "48": "images/icon48.png",
            "128": "images/icon128.png" },
