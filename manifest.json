@@ -8,12 +8,12 @@
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
-      "js": ["js/jquery-2.0.3.min.js", "js/jsuri-1.1.1.min.js", "js/popup.js"],
+      "js": ["js/vendor/jquery-2.0.3.min.js", "js/vendor/jsuri-1.1.1.min.js", "js/popup.js"],
       "all_frames":true
   }],
 
   "background": {
-    "scripts": [ "js/jsuri-1.1.1.min.js", "background.js" ]
+    "scripts": [ "js/vendor/jsuri-1.1.1.min.js", "background.js" ]
   },
   "page_action": {
     "default_icon": {
