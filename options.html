@@ -21,10 +21,10 @@
       </p>
    </header>
    
-   <section class="main container">
+   <section class="main container" ng-controller="ProjectsCtrl">
    	
    	
-    <div class="row" ng-controller="ProjectsCtrl">
+    <div class="row">
       <div class="col-md-12">
 
         <h3>Projects</h3>
@@ -66,7 +66,7 @@
    	
     <div class="row">
         <div class="col-md-12">
-            <button type="button" class="btn btn-primary" ng-click="addEnv(project)" role="button">
+            <button type="button" class="btn btn-primary" ng-click="save()" role="button">
                 <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save
             </button>
         </div>
@@ -79,6 +79,7 @@
     <!-- 3rd party -->
     <script src="js/vendor/jquery-2.0.3.min.js"></script>
     <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-local-storage.js"></script>
     <script src="js/options.js"></script>
 
   </body>

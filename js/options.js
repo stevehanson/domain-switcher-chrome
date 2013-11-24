@@ -9,6 +9,7 @@ $(document).ready(function() {
 });
 
 var app = angular.module('angOptions', []);
+//angular.module('LocalStorageModule').value('prefix', 'domainSwitcher');
 
 app.filter('reverse', function() {
   return function(items) {
@@ -18,48 +19,55 @@ app.filter('reverse', function() {
 
 
 app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
-	$scope.projects = [
-	{
-		name: 'Chairs',
-		envs: [
-			{
-				url: 'http://localhost:8080'
-			},
-			{
-				url: 'http://test.chairs.com'
-			},
-			{
-				url: 'http://chairs.com'
-			},
-		]
-	},
-	{
-		name: 'Coffee App',
-		envs: [
-			{
-				url: 'http://localhost:3000'
-			},
-			{
-				url: 'http://test.coffee.com'
-			},
-			{
-				url: 'http://coffee.com'
-			},
-		]
-	}
-	];
+	$scope.projects = JSON.parse(localStorage['domainSwitcher']);
+	console.log($scope.projects);
+	// $scope.projects2 = [
+	// {
+	// 	name: 'Chairs',
+	// 	envs: [
+	// 		{
+	// 			url: 'http://localhost:8080'
+	// 		},
+	// 		{
+	// 			url: 'http://test.chairs.com'
+	// 		},
+	// 		{
+	// 			url: 'http://chairs.com'
+	// 		},
+	// 	]
+	// },
+	// {
+	// 	name: 'Coffee App',
+	// 	envs: [
+	// 		{
+	// 			url: 'http://localhost:3000'
+	// 		},
+	// 		{
+	// 			url: 'http://test.coffee.com'
+	// 		},
+	// 		{
+	// 			url: 'http://coffee.com'
+	// 		},
+	// 	]
+	// }
+	// ];
 
 	$scope.addEnv = function(project) {
 		project.envs.push({url: ''});
-	}
+	};
 
 	$scope.addProject = function(project) {
 		$scope.projects.unshift({ name: 'New Project', envs: [ { url: '' }]});
-	}
+	};
 
 	$scope.removeProject = function($index) {
 		console.log($index);
 		$scope.projects.splice($index, 1);
-	}
+	};
+
+	$scope.save = function() {
+		localStorage['domainSwitcher'] = JSON.stringify($scope.projects);
+		localStorageService.add('data', JSON.stringify($scope.projects));
+	};
     
 }]);
