@@ -1,13 +1,3 @@
-
-$(document).ready(function() {
-
-	$('.add-button').click(function(e) {
-		alert('here');
-		$('#fg-1').append('<input type="text" class="form-control">');
-		e.preventDefault();
-	});
-});
-
 var app = angular.module('angOptions', []);
 //angular.module('LocalStorageModule').value('prefix', 'domainSwitcher');
 
@@ -20,37 +10,6 @@ app.filter('reverse', function() {
 
 app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
 	$scope.projects = JSON.parse(localStorage['domainSwitcher']);
-	console.log($scope.projects);
-	// $scope.projects2 = [
-	// {
-	// 	name: 'Chairs',
-	// 	envs: [
-	// 		{
-	// 			url: 'http://localhost:8080'
-	// 		},
-	// 		{
-	// 			url: 'http://test.chairs.com'
-	// 		},
-	// 		{
-	// 			url: 'http://chairs.com'
-	// 		},
-	// 	]
-	// },
-	// {
-	// 	name: 'Coffee App',
-	// 	envs: [
-	// 		{
-	// 			url: 'http://localhost:3000'
-	// 		},
-	// 		{
-	// 			url: 'http://test.coffee.com'
-	// 		},
-	// 		{
-	// 			url: 'http://coffee.com'
-	// 		},
-	// 	]
-	// }
-	// ];
 
 	$scope.addEnv = function(project) {
 		project.envs.push({url: ''});
