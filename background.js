@@ -21,7 +21,10 @@ function getEnvsForCurrentUrl(projects, currentUrl) {
 	projects.forEach(function(project) {
 		if(found) return false; // break
 		project.envs.forEach(function(env) {
-			env = new Uri(env.url);
+			if(env.url.indexOf('://') == -1) {
+				env.urlToMatch = 'http://' + env.url;
+			}
+			env = new Uri(env.urlToMatch);
 			if(urlsMatch(currUrl, env)) {
 				found = project.envs.map(function(env){ 
 					if(env.url) // not empty or null 
@@ -48,7 +51,7 @@ function urlsMatch(currUrl, match) {
 	if(currUrl.path() === '') {
 		currUrl.path('/'); // in case '/' added in options page, will still match 
 	}
-
+	console.log("checking current url " + currUrl.toString() + " for match with " + match.toString());
 	return (currUrl.toString().indexOf(match.toString()) === 0);
 
 }

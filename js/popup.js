@@ -29,6 +29,9 @@ app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope)
 	};
 
 	$scope.urlMatches = function(url) {
+		if(url.indexOf('://') == -1) {
+			url = 'http://' + url;
+		}
 		return chrome.extension.getBackgroundPage().urlsMatch($scope.url, new Uri(url));
 	};
 
