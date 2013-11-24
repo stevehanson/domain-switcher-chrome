@@ -66,7 +66,13 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 	};
 
 	$scope.save = function() {
-		localStorage['domainSwitcher'] = JSON.stringify($scope.projects);
+		$scope.removeEmptyUrls();
+		localStorage['domainSwitcher'] = JSON.stringify($scope.projects, function (key, val) {
+			if (key == '$$hashKey') { // remove angular hash-keys to prevent collisions when loading from storage
+				return undefined;
+			}
+			return val;
+		});
 		$('#save-success').fadeIn().delay(1000).fadeOut();
 	};
 
@@ -76,6 +82,16 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 
 	$scope.doneEditName = function(project){
 		project.editMode = false;
+	};
+
+	$scope.removeEmptyUrls = function() {
+		$scope.projects.forEach(function(project) {
+			project.envs.forEach(function(env, index) {
+				if(!env.url) {
+					project.envs.splice(index, 1);
+				}
+			});
+		});
 	};
     
 }]);

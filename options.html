@@ -29,35 +29,41 @@
 
         <h3>Projects</h3>
 
-        <div class="form-group">
-          <button class="btn btn-primary" role="button" ng-click="addProject()">
+        <div class="form-group add-project-group">
+          <button class="btn btn-primary btn-sm" role="button" ng-click="addProject()">
             <span class="glyphicon glyphicon-plus-sign"></span> Add project
           </button>
         </div>
 
         <div class="projects-list">
-            <div ng-repeat="project in projects" class="panel panel-primary" ng-class="{'panel-default': project.enabled}">
+            <div ng-repeat="project in projects" class="panel panel-default" ng-class="{'panel-default': project.enabled}">
                 <div class="panel-heading" ng-mouseenter="project.showEdit = true" ng-mouseleave="project.showEdit = false">
-                    <span ng-hide="project.editMode">{{project.name}}</span>
                     
+                    <span class="panel-title" ng-hide="project.editMode">{{project.name}}</span>
+                            
                     <span ng-show="project.editMode">
                         <input type="text" ng-model="project.name"/>
-                        <button class="btn btn-small btn-primary" ng-click="doneEditName(project)">Update</button>
+                        <button class="btn btn-sm btn-primary" ng-click="doneEditName(project)">Update</button>
                     </span>
+                        
+                    <span class="pull-right panel-right-heading">
+                        <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
+
+                        <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
+                    </span>
+                        
                     
-                    <a href="#" class="panel-heading-link pull-right rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
-                    <a href="#" class="panel-heading-link pull-right" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div ng-repeat="env in project.envs" class="col-md-3">
+                        <div ng-repeat="env in project.envs" class="col-sm-4 col-md-3">
                             <div class="form-group">
-                                <input type="text" class="form-control" ng-model="env.url">
+                                <input type="text" class="form-control" placeholder="Eg: localhost:3000" ng-model="env.url">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-sm-4 col-md-3">
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary" ng-click="addEnv(project)" role="button">
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="addEnv(project)" role="button">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Add env
                                 </button>
                             </div>

@@ -1,5 +1,9 @@
 a.panel-heading-link {
-	color: white;
+	color: black;
+}
+
+.add-project-group {
+	margin-bottom: 20px;
 }
 
 .ng-hide {
