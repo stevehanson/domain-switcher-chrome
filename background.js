@@ -1,3 +1,30 @@
+function onInstall() {
+	chrome.tabs.create({'url': chrome.extension.getURL("options.html") } );
+}
+
+function onUpdate() {
+	console.log("Extension Updated");
+}
+
+function getVersion() {
+	var details = chrome.app.getDetails();
+	return details.version;
+}
+
+// Check if the version has changed.
+var currVersion = getVersion();
+var prevVersion = localStorage['version'];
+if (currVersion != prevVersion) {
+	// Check if we just installed this extension.
+	if (typeof prevVersion == 'undefined') {
+		onInstall();
+	} else {
+		onUpdate();
+	}
+	localStorage['version'] = currVersion;
+}
+
+
 // Called when new tab opened
 function checkForValidUrl(tabId, changeInfo, tab) {
   projects = JSON.parse(localStorage['domainSwitcher']);
@@ -21,14 +48,15 @@ function getEnvsForCurrentUrl(projects, currentUrl) {
 	projects.forEach(function(project) {
 		if(found) return false; // break
 		project.envs.forEach(function(env) {
+			var urlToMatch = env.url;
 			if(env.url.indexOf('://') == -1) {
-				env.urlToMatch = 'http://' + env.url;
+				urlToMatch = 'http://' + env.url;
 			}
-			env = new Uri(env.urlToMatch);
+			env = new Uri(urlToMatch);
 			if(urlsMatch(currUrl, env)) {
-				found = project.envs.map(function(env){ 
+				found = project.envs.map(function(env){
 					if(env.url) // not empty or null 
-						return env; 
+						return env;
 				}).filter(function(env) {
 					return (env); // filter out empty or null
 				});
@@ -40,7 +68,9 @@ function getEnvsForCurrentUrl(projects, currentUrl) {
 
 }
 
+
 function urlsMatch(currUrl, match) {
+	console.log('Checking ' + currUrl.toString() + ' against domain ' + match.toString());
 	if(!match.host()) return false; // if blank url
 	match.setProtocol('http'); // don't care abt protocol
 	currUrl.setProtocol('http'); // don't care abt protocol
@@ -55,12 +85,33 @@ function urlsMatch(currUrl, match) {
 
 }
 
+function addHttpIfNoProtocol(url) {
+	if(url.indexOf('://') == -1) {
+		return 'http://' + url;
+	} else {
+		return url;
+	}
+}
+
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	chrome.tabs.query({active:true},function(tabs){
+		// update current URL to use host, domain, port, start of path of the selected
+		// environment.
 		var uri = new Uri(tabs[0].url);
-		uri.host(request.url);
+		var requestUrl = addHttpIfNoProtocol(request.url);
+		var newUri = new Uri(requestUrl);
+
+		console.log('new uri: ' + newUri.toString());
+		console.log("current uri: " + uri.toString());
+		
+		uri.host(newUri.host());
+		uri.port(newUri.port());
+		uri.protocol(newUri.protocol());
+		//uri.path(newUri.path + uri.path());
+		console.log('new uri, updated: ' + uri.toString());
+		
     chrome.tabs.update(tabs[0].id, {url: uri.toString()});
     return "1";
   });

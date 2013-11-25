@@ -11,7 +11,7 @@
     "scripts": [ "js/vendor/jsuri-1.1.1.min.js", "background.js" ]
   },
   "permissions": [
-    "tabs", "http://*/*" , "https://*/*"
+    "tabs"
   ],
   "page_action": {
     "default_icon": {
