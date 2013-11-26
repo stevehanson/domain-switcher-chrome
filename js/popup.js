@@ -18,6 +18,7 @@ app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope)
 	});
 	
 	$scope.selectEnv = function(url) {
+		console.log("Selected env " + url);
 		chrome.runtime.sendMessage({url: url}, function(response) {
 			
 		});

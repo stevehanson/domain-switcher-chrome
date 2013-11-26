@@ -1,14 +1,8 @@
 var app = angular.module('angOptions', []);
-//angular.module('LocalStorageModule').value('prefix', 'domainSwitcher');
-
-app.filter('reverse', function() {
-  return function(items) {
-    return items.slice().reverse();
-  };
-});
 
 
 app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
+	$scope.pizza = 'chicago deep dish';
 	var data = localStorage['domainSwitcher'];
 	if(data != null) {
 		$scope.projects = JSON.parse(data);	
