@@ -9,7 +9,7 @@
 
     <h4>Switch Domain</h4>
     <div class="list-group domains">
-      <a ng-repeat="env in envs" ng-click="selectEnv(env.url)" class="list-group-item" ng-class="{active: env.active}">{{env.url}}</a>
+      <a ng-repeat="env in envs" ng-click="selectEnv(env.url, $event)" class="list-group-item" ng-class="{active: env.active}">{{env.url}}</a>
     </div>
     
     <a class="pull-right" id="settings" href="#" ng-click="loadSettings()"><span class="glyphicon glyphicon-wrench"></span> Options</a>
