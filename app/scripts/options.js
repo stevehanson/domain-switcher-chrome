@@ -14,7 +14,7 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 	};
 
 	$scope.addProject = function(project) {
-		$scope.projects.unshift({ name: 'New Project', editMode: true, envs: [ { url: '' }]});
+		$scope.projects.unshift({ name: '', editMode: true, envs: [ { url: '' }]});
 	};
 
 	$scope.removeProject = function($index) {

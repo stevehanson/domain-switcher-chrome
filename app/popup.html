@@ -2,8 +2,8 @@
 <html ng-app="angOptions" ng-csp>
   <head>
     <title>Domain Switcher Extension</title>
-    <link href="css/bootstrap-3.0.2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/popup.css">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/popup.css">
   </head>
   <body ng-controller="UrlsCtrl">
 
@@ -11,14 +11,14 @@
     <div class="list-group domains">
       <a ng-repeat="env in envs" ng-click="selectEnv(env.url, $event)" class="list-group-item" ng-class="{active: env.active}">{{env.url}}</a>
     </div>
-    
+
     <a class="pull-right" id="settings" href="#" ng-click="loadSettings()"><span class="glyphicon glyphicon-wrench"></span> Options</a>
     <div class="clearfix"></div>
 
-    <script src="js/vendor/jquery-2.0.3.min.js"></script>
-    <script src="js/vendor/jsuri-1.1.1.min.js"></script>
-    <script src="js/vendor/angular.min.js"></script>
-    <script src="js/popup.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jsuri/Uri.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="scripts/popup.js"></script>
 
   </body>
 </html>

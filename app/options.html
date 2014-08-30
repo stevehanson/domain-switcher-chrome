@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Domain Switcher</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link href="css/bootstrap-3.0.2.min.css" rel="stylesheet">
-    <link href="css/options.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/options.css" rel="stylesheet">
   </head>
   <body>
 
@@ -43,7 +43,7 @@
                     <span class="panel-title" ng-hide="project.editMode">{{project.name}}</span>
 
                     <span ng-show="project.editMode">
-                        <input type="text" ng-model="project.name" ng-blur="doneEditName(project)" />
+                        <input type="text" placeholder="New Project Name" ng-model="project.name" ng-blur="doneEditName(project)" />
                     </span>
 
                     <span class="pull-right panel-right-heading">
@@ -89,9 +89,9 @@
 
 </section>
 
-    <script src="js/vendor/jquery-2.0.3.min.js"></script>
-    <script src="js/vendor/angular.min.js"></script>
-    <script src="js/options.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="scripts/options.js"></script>
 
   </body>
 </html>
