@@ -32,15 +32,14 @@ function checkForValidUrl(tabId, changeInfo, tab) {
   var projects = JSON.parse(data);
   var envs = getEnvsForCurrentUrl(projects, tab.url);
   if(envs) {
-
-	chrome.pageAction.show(tabId);
-	chrome.pageAction.setTitle({
-		tabId: tab.id,
-		title: "url: " + tab.url
-	});
-	chrome.pageAction.setPopup({tabId: tab.id, popup: 'popup.html'});
+		chrome.pageAction.show(tabId);
+		chrome.pageAction.setTitle({
+			tabId: tab.id,
+			title: "url: " + tab.url
+		});
+		chrome.pageAction.setPopup({tabId: tab.id, popup: 'popup.html'});
   }
-  
+
 }
 
 function getEnvsForCurrentUrl(projects, currentUrl) {
@@ -54,7 +53,7 @@ function getEnvsForCurrentUrl(projects, currentUrl) {
 			env = new Uri(urlToMatch);
 			if(urlsMatch(currUrl, env)) {
 				found = project.envs.map(function(env){
-					if(env.url) // not empty or null 
+					if(env.url) // not empty or null
 						return env;
 				}).filter(function(env) {
 					return (env); // filter out empty or null
@@ -78,7 +77,7 @@ function getCurrentUrlEntry(currentUrl) {
 		env = new Uri(urlToMatch);
 		if(urlsMatch(currUrl, env)) {
 			found = env;
-			return false; // break		
+			return false; // break
 		}
 	});
 	return found;
@@ -92,9 +91,9 @@ function urlsMatch(currUrl, match) {
 
 	currUrl.host(stripWwwIfPresent(currUrl.host()));
 	match.host(stripWwwIfPresent(match.host()));
-	
+
 	if(currUrl.path() === '') {
-		currUrl.path('/'); // in case '/' added in options page, will still match 
+		currUrl.path('/'); // in case '/' added in options page, will still match
 	}
 	return (currUrl.toString().indexOf(match.toString()) === 0);
 }
@@ -117,13 +116,13 @@ chrome.tabs.onUpdated.addListener(checkForValidUrl);
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	chrome.tabs.query({active:true, currentWindow: true},function(tabs){
-		
+
 		// update current URL to use host, domain, port, start of path of the selected environment.
 		var uri = new Uri(tabs[0].url);
 		var requestUrl = addHttpIfNoProtocol(request.url);
 		var newUri = new Uri(requestUrl);
 		var currUriEntry = getCurrentUrlEntry(tabs[0].url);
-		
+
 		// update uri to use host, port, protocol of selected ENV
 		uri.host(newUri.host());
 		uri.port(newUri.port());

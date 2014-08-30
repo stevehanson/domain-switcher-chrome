@@ -2,10 +2,9 @@ var app = angular.module('angOptions', []);
 
 
 app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
-	$scope.pizza = 'chicago deep dish';
 	var data = localStorage['domainSwitcher'];
 	if(data != null) {
-		$scope.projects = JSON.parse(data);	
+		$scope.projects = JSON.parse(data);
 	} else {
 		$scope.projects = [];
 	}
@@ -19,7 +18,6 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 	};
 
 	$scope.removeProject = function($index) {
-		console.log($index);
 		$scope.projects.splice($index, 1);
 	};
 
@@ -51,5 +49,5 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 			});
 		});
 	};
-    
+
 }]);

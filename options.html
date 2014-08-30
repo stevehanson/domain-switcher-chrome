@@ -11,7 +11,7 @@
 
     <header class="container">
       <div id="heading" class="masthead">
-        
+
         <h2>Domain Switcher <small>Settings</small></h2>
       </div>
 
@@ -21,10 +21,10 @@
 
       <p>It is recommended you leave off "http://" as it will be ignored anyway.</p>
    </header>
-   
+
    <section class="main container" ng-controller="ProjectsCtrl">
-   	
-   	
+
+
     <div class="row">
       <div class="col-md-12">
 
@@ -39,21 +39,20 @@
         <div class="projects-list">
             <div ng-repeat="project in projects" class="panel panel-default" ng-class="{'panel-default': project.enabled}">
                 <div class="panel-heading" ng-mouseenter="project.showEdit = true" ng-mouseleave="project.showEdit = false">
-                    
+
                     <span class="panel-title" ng-hide="project.editMode">{{project.name}}</span>
-                            
+
                     <span ng-show="project.editMode">
-                        <input type="text" ng-model="project.name"/>
-                        <button class="btn btn-sm btn-primary" ng-click="doneEditName(project)">Update</button>
+                        <input type="text" ng-model="project.name" ng-blur="doneEditName(project)" />
                     </span>
-                        
+
                     <span class="pull-right panel-right-heading">
                         <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
 
                         <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
                     </span>
-                        
-                    
+
+
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -77,7 +76,7 @@
 
       </div> <!-- col-md-12 -->
     </div> <!-- row -->
-   	
+
     <div class="row">
         <div class="col-md-12">
             <button type="button" class="btn btn-primary" ng-click="save()" role="button">
@@ -86,10 +85,10 @@
             <span class="alert alert-success alert-small is-hidden" id="save-success">Save successful</span>
         </div>
     </div>
- 
-   
+
+
 </section>
-   
+
     <script src="js/vendor/jquery-2.0.3.min.js"></script>
     <script src="js/vendor/angular.min.js"></script>
     <script src="js/options.js"></script>
