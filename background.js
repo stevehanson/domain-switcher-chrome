@@ -136,9 +136,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 			currentPath = uri.path().replace(currUriEntry.path(), '');
 		}
 		uri.path(newUri.path() + currentPath);
-		console.log('updating to ' + uri.toString());
-		console.log(tabs);
-        chrome.tabs.update(tabs[0].id, {url: uri.toString()});
+		console.log('updating to', uri.toString(), tabs);
+		if(request.openInNewTab){ chrome.tabs.create({ url: uri.toString() }); }
+		else { chrome.tabs.update(tabs[0].id, {url: uri.toString()}); }
 
   });
 });

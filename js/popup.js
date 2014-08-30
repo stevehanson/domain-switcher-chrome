@@ -16,12 +16,13 @@ app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope)
 		$scope.updateActive();
 		$scope.$apply();
 	});
-	
-	$scope.selectEnv = function(url) {
-		console.log("Selected env " + url);
-		chrome.runtime.sendMessage({url: url}, function(response) {
-			
-		});
+
+	$scope.selectEnv = function(url, event) {
+		console.log('selectEnv:', url, event);
+		chrome.runtime.sendMessage({
+			url: url,
+			openInNewTab: (event.altKey || event.ctrlKey || event.metaKey)
+		}, function(rsp){});
 		window.close();
 	};
 
