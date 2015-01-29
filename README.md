@@ -1,7 +1,9 @@
 Domain Switcher
 ======================
 
-Domain Switcher Chrome extension. Allows developers to easily switch between various environments
+[Download in the Chrome Webstore](https://chrome.google.com/webstore/detail/domain-switcher/lbehdhpgigdlinfkidifkbhjnaglfojc?hl=en-US)
+
+The Domain Switcher Chrome extension allows developers to easily switch between various environments
 
 As a developer, it can be a hassle to switch between various environments (e.g. dev, uat, prod). This extension is designed to allow the developer to quickly switch between environments when they are on a page.
 
@@ -9,10 +11,12 @@ Domain Switcher allows you to organize the environments for the various projects
 
 For example, if you are working on a project about "coffee", you could enter environments: "localhost:3000", "test.coffee.com", "coffee.com". Then, when you are on any of these domains, you will have an icon in your URL bar that will allow you to switch to the other environments. The path of the page you are on is preserved in the URL.
 
-## Development
+## Contributing
 
 This project was set up using the Yeoman [generator-chrome-extension](https://github.com/yeoman/generator-chrome-extension). To build:
 
 * npm install
 * bower install
 * grunt build
+
+Pull requests are welcome!
