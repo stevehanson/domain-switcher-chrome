@@ -5,12 +5,12 @@ console.log('\'Allo \'Allo! Content script');
 var url = '';
 var color = '';
 var bg_color = '';
-var current_url      = window.location.href;
+// var current_url = window.location.href.replace('https://www', '');
+var current_url = window.location.href.replace(/(https?:\/\/w*.)/g, '').slice(0, -1);
 console.log(current_url);
 
 chrome.runtime.sendMessage({method: "getLocalStorage", key: "domainSwitcher"}, function(response) {
 	var result = JSON.parse(response.data);
-	console.log(result);
 
 	url = result[0]['envs'][0]['url'];
 	color = result[0]['envs'][0]['color'];
@@ -18,6 +18,7 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "domainSwitcher"}, f
 });
 
 $(document).ready(function() {
+	console.log(url);
 
 	if (current_url == url) {
 		var element = '<div class="domain-switcher-bar" style="background-color:'
