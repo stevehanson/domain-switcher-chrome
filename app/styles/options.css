@@ -6,6 +6,14 @@ a.panel-heading-link {
 	color: black;
 }
 
+.panel-body .form-group .form-control {
+	margin-bottom: 10px;
+}
+
+.panel-body .form-group .form-control:last-child {
+	margin-bottom: 0;
+}
+
 .add-project-group {
 	margin-bottom: 20px;
 }
