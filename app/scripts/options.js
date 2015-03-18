@@ -10,9 +10,7 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 	}
 
 	$scope.addEnv = function(project) {
-		project.envs.push({url: ''});
-		project.envs.push({color: ''});
-		project.envs.push({bg_color: ''});
+		project.envs.push({url: '', color: '', bg_color: '', text: ''});
 	};
 
 	$scope.addProject = function(project) {
@@ -31,11 +29,6 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 			}
 			return val;
 		});
-
-		chrome.storage.sync.set({'color': '#000'}, function() {
-			console.log("Saved");
-		});
-
 		$('#save-success').fadeIn().delay(1000).fadeOut();
 	};
 
@@ -50,7 +43,7 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', function($rootScope, $sc
 	$scope.removeEmptyUrls = function() {
 		$scope.projects.forEach(function(project) {
 			project.envs.forEach(function(env, index) {
-				if(!env.url && !env.color && !env.bg_color) {
+				if(!env.url && !env.color && !env.bg_color && !env.text) {
 					project.envs.splice(index, 1);
 				}
 			});

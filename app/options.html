@@ -56,19 +56,44 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div ng-repeat="env in project.envs" class="col-sm-4 col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Eg: localhost:3000" ng-model="env.url">
-                                <input type="text" class="form-control" placeholder="Color: Eg: #000000" ng-model="env.color">
-                                <input type="text" class="form-control" placeholder="Background color: Eg: #000000" ng-model="env.bg_color">
+                        <div class="col-xs-12">
+                            <div class="col-sm-3">
+                              Domain name
+                            </div>
+                            <div class="col-sm-3">
+                              Text color
+                            </div>
+                            <div class="col-sm-3">
+                              Background color
+                            </div>
+                            <div class="col-sm-3">
+                              Text to be displayed (max xx characters)
                             </div>
                         </div>
-                        <div class="col-sm-4 col-md-3">
+                    </div>
+                    <div class="row">
+                        <div ng-repeat="env in project.envs" class="col-xs-12">
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary btn-sm" ng-click="addEnv(project)" role="button">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Add env
-                                </button>
+                                <div class="col-sm-3">
+                                  <input type="text" class="form-control" placeholder="Eg: localhost:3000" ng-model="env.url">
+                                </div>
+                                <div class="col-sm-3">
+                                  <input type="text" class="form-control" placeholder="Color: Eg: #000000" ng-model="env.color">
+                                </div>
+                                <div class="col-sm-3">
+                                  <input type="text" class="form-control" placeholder="Background color: Eg: black" ng-model="env.bg_color">
+                                </div>
+                                <div class="col-sm-3">
+                                  <input type="text" class="form-control" placeholder="Text: Eg: Production" ng-model="env.text" maxlength="20">
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="addEnv(project)" role="button">
+                                <span class="glyphicon glyphicon-plus-sign"></span> Add env
+                            </button>
                         </div>
                     </div> <!-- row -->
                 </div> <!-- panel body -->

@@ -1,11 +1,12 @@
 .domain-switcher-bar {
 	position: fixed;
-	top: 48px;
-	left: -50px;
-	width: 200px;
+	top: 75px;
+	left: -60px;
+	width: 300px;
 	transform: rotate(-45deg);
 	text-align: center;
 	font-size: 20px;
 	padding: 5px;
 	text-shadow: none;
+	z-index: 9999;
 }
