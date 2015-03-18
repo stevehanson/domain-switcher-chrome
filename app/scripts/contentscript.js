@@ -25,14 +25,25 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "domainSwitcher"}, f
 function addBanner () {
 	$(document).ready(function() {
 		if (current_url.indexOf(url) == 0) {
-			var element = '<div class="domain-switcher-bar" style="background-color:'
+			var element = '<div id="domain-switcher-wrapper" class="domain-switcher-wrapper"><div class="domain-switcher-bar" style="background-color:'
 			+ bg_color
 			+ '; color:'
 			+ color
 			+ '">'
 			+ text
-			+ '</div>'
+			+ '</div></div>'
 			$('body').append(element);
+
+			$( "body" ).mousemove(function( event ) {
+				var msg = "Handler for .mousemove() called at ";
+				msg += event.pageX + ", " + event.pageY;
+
+				if(event.pageX <= 200 && event.pageY <= 200) {
+					$("#domain-switcher-wrapper").addClass("reversed");
+				} else {
+					$("#domain-switcher-wrapper").removeClass("reversed");
+				}
+			});
 		}
 	});
 }
