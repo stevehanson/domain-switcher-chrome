@@ -1,64 +1,104 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="angOptions" ng-csp>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Domain Switcher</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/options.css" rel="stylesheet">
-  </head>
-  <body>
+</head>
+<body>
 
     <header class="container">
       <div id="heading" class="masthead">
 
         <h2>Domain Switcher <small>Settings</small></h2>
-      </div>
+    </div>
 
-      <p>
+    <p>
         Domain Switcher allows you to organize the environments (e.g. dev, uat, prod) for the various pojects you work on. Simply create a record below for your project and enter the domains for the various urls you work with. We'll do the rest, and you'll be able to simply switch between environments by clicking the arrow icon in your address bar when you are on a page that matches a URL you entered.
-      </p>
+    </p>
 
-      <p>It is recommended you leave off "http://" as it will be ignored anyway.</p>
-   </header>
+    <p>It is recommended you leave off "http://" as it will be ignored anyway.</p>
+</header>
 
-   <section class="main container" ng-controller="ProjectsCtrl">
+<section class="main container" ng-controller="ProjectsCtrl">
 
 
     <div class="row">
-      <div class="col-md-12">
+        <div class="col-md-12">
 
-        <h3>Projects</h3>
+            <h3>Projects</h3>
 
-        <div class="form-group add-project-group">
-          <button class="btn btn-primary btn-sm" role="button" ng-click="addProject()">
-            <span class="glyphicon glyphicon-plus-sign"></span> Add project
-          </button>
-        </div>
+            <div class="form-group add-project-group">
+                <button class="btn btn-primary btn-sm" role="button" ng-click="addProject()">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add project
+                </button>
+            </div>
 
-        <div class="projects-list">
-            <div ng-repeat="project in projects" class="panel panel-default" ng-class="{'panel-default': project.enabled}">
-                <div class="panel-heading" ng-mouseenter="project.showEdit = true" ng-mouseleave="project.showEdit = false">
+            <div class="projects-list">
+                <div ng-repeat="project in projects" class="panel panel-default" ng-class="{'panel-default': project.enabled}">
+                    <div class="panel-heading" ng-mouseenter="project.showEdit = true" ng-mouseleave="project.showEdit = false">
 
-                    <span class="panel-title" ng-hide="project.editMode">{{project.name}}</span>
+                        <span class="panel-title" ng-hide="project.editMode">{{project.name}}</span>
 
-                    <span ng-show="project.editMode">
-                        <input type="text" placeholder="New Project Name" ng-model="project.name" ng-blur="doneEditName(project)" />
-                    </span>
+                        <span ng-show="project.editMode">
+                            <input type="text" placeholder="New Project Name" ng-model="project.name" ng-blur="doneEditName(project)" />
+                        </span>
 
-                    <span class="pull-right panel-right-heading">
-                        <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
+                        <span class="pull-right panel-right-heading">
+                            <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
 
-                        <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
-                    </span>
+                            <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
+                        </span>
 
 
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div ng-repeat="env in project.envs" class="col-sm-4 col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Eg: localhost:3000" ng-model="env.url">
+                    </div>
+                    <div class="panel-body">
+                        <div class="row hidden-xs">
+                            <div class="col-xs-12">
+                                <div class="col-sm-3">
+                                    Domain name
+                                </div>
+                                <div class="col-sm-3">
+                                    Text color
+                                </div>
+                                <div class="col-sm-3">
+                                    Background color
+                                </div>
+                                <div class="col-sm-3">
+                                    Text to be displayed (max 20 characters)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div ng-repeat="env in project.envs" class="col-xs-12 well">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <div class="visible-xs">
+                                            Domain name
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Eg: localhost:3000" ng-model="env.url">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="visible-xs">
+                                            Text color
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Color: Eg: #000000" ng-model="env.color">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="visible-xs">
+                                            Background color
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Background color: Eg: black" ng-model="env.bg_color">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="visible-xs">
+                                            Text to be displayed (max 20 chars)
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Text: Eg: Production" ng-model="env.text" maxlength="20">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-3">
@@ -67,14 +107,11 @@
                                     <span class="glyphicon glyphicon-plus-sign"></span> Add env
                                 </button>
                             </div>
-                        </div>
-                    </div> <!-- row -->
-                </div> <!-- panel body -->
-            </div> <!-- panel -->
-        </div>
-
-
-      </div> <!-- col-md-12 -->
+                        </div> <!-- row -->
+                    </div> <!-- panel body -->
+                </div> <!-- panel -->
+            </div>
+        </div> <!-- col-md-12 -->
     </div> <!-- row -->
 
     <div class="row">
@@ -85,13 +122,11 @@
             <span class="alert alert-success alert-small is-hidden" id="save-success">Save successful</span>
         </div>
     </div>
-
-
 </section>
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="scripts/options.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="scripts/options.js"></script>
 
-  </body>
+</body>
 </html>

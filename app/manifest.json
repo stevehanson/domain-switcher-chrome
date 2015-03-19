@@ -1,6 +1,6 @@
 {
     "name": "__MSG_appName__",
-    "version": "0.6.0",
+    "version": "0.6.10",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -15,6 +15,21 @@
             "scripts/background.js"
         ]
     },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "css": [
+                "styles/domain-switcher-bar.css"
+            ],
+            "js": [
+                "scripts/jquery-1.11.2.min.js",
+                "scripts/contentscript.js"
+            ]
+        }
+    ],
     "page_action": {
         "default_icon": {
             "19": "images/icon-19.png",
@@ -25,6 +40,7 @@
     },
     "options_page": "options.html",
     "permissions": [
-        "tabs"
+        "tabs",
+        "storage"
     ]
 }

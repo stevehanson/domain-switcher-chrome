@@ -6,6 +6,10 @@ a.panel-heading-link {
 	color: black;
 }
 
+.panel-body .form-group > div {
+	margin-bottom: 10px;
+}
+
 .add-project-group {
 	margin-bottom: 20px;
 }

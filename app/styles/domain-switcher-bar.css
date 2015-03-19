@@ -1,0 +1,28 @@
+.domain-switcher-wrapper {
+	position: fixed;
+	top: 0;
+	left: -45px;
+	height: 200px;
+	width: 265px;
+}
+
+.domain-switcher-wrapper .domain-switcher-bar {
+	transform: rotate(-45deg);
+	top: 75px;
+	right: 0;
+	position: relative;
+	text-align: center;
+}
+
+.reversed {
+	position: fixed;
+	top: 0;
+	left: initial;
+	right: -45px;
+	height: 200px;
+	width: 265px;
+}
+
+.reversed .domain-switcher-bar {
+	transform: rotate(45deg);
+}
