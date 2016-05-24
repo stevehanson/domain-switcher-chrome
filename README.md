@@ -19,4 +19,12 @@ This project was set up using the Yeoman [generator-chrome-extension](https://gi
 * bower install
 * grunt build
 
+### Development
+
+To load the extension manually, go to http://chrome://extensions and choose "Load unpacked extensions" and select the "app" directory.
+
+### Releases
+
+Only the repo owner will create builds or update the `manifest.json` version. This is done with `grunt build`.
+
 Pull requests are welcome!
