@@ -1,7 +1,7 @@
 body {
   min-width: 200px;
   overflow-x: hidden;
-  padding: 5px 10px 15px;  
+  padding: 5px 10px 15px;
 }
 
 img {
@@ -9,7 +9,7 @@ img {
   border: 2px solid black;
   vertical-align: middle;
   width: 75px;
-  height: 75px; 
+  height: 75px;
 }
 
 .list-group {
@@ -20,6 +20,7 @@ img {
 .list-group-item {
   border-radius: 0 !important;
   border-radius: 0 !important;
+  cursor: pointer;
 }
 
 #settings:focus {
