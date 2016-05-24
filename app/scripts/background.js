@@ -155,8 +155,16 @@ chrome.extension.onMessage.addListener(function(request) {
     }
     uri.path(newUri.path() + currentPath);
     console.log('updating to', uri.toString(), tabs);
-    if(request.openInNewTab){ chrome.tabs.create({ url: uri.toString() }); }
-    else { chrome.tabs.update(tabs[0].id, {url: uri.toString()}); }
+    if(request.openInNewTab) {
+      chrome.tabs.query({active: true, currentWindow:true}, function(activeTabs) {
+        chrome.tabs.create({
+          url: uri.toString(),
+          index: (activeTabs.length > 0 && activeTabs[0].index + 1) || null
+        });
+      });
+    } else {
+      chrome.tabs.update(tabs[0].id, {url: uri.toString()});
+    }
 
   });
 });
