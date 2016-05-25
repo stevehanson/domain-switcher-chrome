@@ -21,7 +21,7 @@ app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope)
 		console.log('selectEnv:', url, event);
 		chrome.runtime.sendMessage({
 			url: url,
-			openInNewTab: (event.altKey || event.ctrlKey || event.metaKey)
+			openInNewTab: (event.altKey || event.ctrlKey || event.metaKey || event.which == 2)
 		}, function(rsp){});
 		window.close();
 	};
