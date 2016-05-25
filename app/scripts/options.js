@@ -1,7 +1,7 @@
 var app = angular.module('angOptions', []);
 
 
-app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', function($rootScope, $scope, $filter) {
+app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', function($rootScope, $scope, $filter, $location) {
 	var data = localStorage['domainSwitcher'];
 	if(data != null) {
 		$scope.projects = JSON.parse(data);
@@ -29,11 +29,11 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', function($roo
 		}
 	}
 
-	$scope.addProject = function(project) {
+	$scope.addProject = function(liveDomain) {
 		var data = { name: '', editMode: true, isTemplate: false, envs: []}
 		var template = $scope.getTemplate();
 		if (template) {
-			var liveDomain = window.prompt('Enter the live domain to create from a template (or leave empty)');
+			var liveDomain = window.prompt('Enter the live domain to create from a template (or leave empty)', liveDomain);
 			if (liveDomain) {
 				template.envs.forEach(function(value) {
 					var templateUrl = value.url;
@@ -41,6 +41,12 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', function($roo
 					generatedUrl = generatedUrl.replace("$", liveDomain);
 					data.envs.push({url: generatedUrl});
 				});
+			} else {
+				data.envs.push({ url: '' });
+			}
+		} else {
+			if (liveDomain) {
+				data.envs.push({ url: liveDomain });
 			} else {
 				data.envs.push({ url: '' });
 			}
@@ -80,5 +86,9 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', function($roo
 			});
 		});
 	};
+
+	$scope.init = function() {
+		$scope.addProject($location.search().newDomain);
+	}
 
 }]);

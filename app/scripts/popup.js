@@ -26,6 +26,10 @@ app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope)
 		window.close();
 	};
 
+	$scope.addProject = function() {
+		chrome.tabs.create({'url': chrome.extension.getURL("options.html#?newDomain=" + $scope.url.host()) } );
+	};
+
 	$scope.loadSettings = function() {
 		chrome.tabs.create({'url': chrome.extension.getURL("options.html") } );
 	};
