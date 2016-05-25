@@ -44,10 +44,15 @@
 
                     <span ng-show="project.editMode">
                         <input type="text" placeholder="New Project Name" ng-model="project.name" ng-blur="doneEditName(project)" />
+                        <input type="button" ng-if="!project.isTemplate" ng-click="makeTemplate(project)" value="Make template" class="btn btn-xs">
+                        <span ng-if="project.isTemplate">
+                            <span class="label label-info">Template</span>
+                            Use <code>$</code> as a placeholder for the live domain, or <code>$$</code> for the live domain without <code>www.</code>
+                        </span>
                     </span>
 
                     <span class="pull-right panel-right-heading">
-                        <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit name</a>
+                        <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode" ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit header</a>
 
                         <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject($index)"><span class="glyphicon glyphicon-remove"></span></a>
                     </span>
