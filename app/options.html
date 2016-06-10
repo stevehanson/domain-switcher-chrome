@@ -44,13 +44,15 @@
 
                     <span ng-show="project.editMode">
                         <input type="text" placeholder="New Project Name" ng-model="project.name" ng-blur="doneEditName(project)" />
-                        <input type="button" ng-if="!project.isTemplate" ng-click="makeTemplate(project)" value="Set as template" class="btn btn-xs">
+                        <button ng-if="!project.isTemplate" ng-click="makeTemplate(project)" class="btn btn-xs">
+                            <span class="glyphicon glyphicon-book"></span> Make template
+                        </button>
                     </span>
 
                     <span ng-if="project.isTemplate">
-                        <span class="label label-info">This is the Template</span>
+                        <span class="label label-info">This is the template</span>
+                        This template is used to quickly create new projects.
                         Use <code>$</code> as a placeholder for the live domain, or <code>$$</code> for the live domain without <code>www.</code>.
-                        This template is used if you use the "Add environment" menu function from a live site.
                     </span>
 
                     <span class="pull-right panel-right-heading">
