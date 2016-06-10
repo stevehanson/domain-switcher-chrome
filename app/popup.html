@@ -12,8 +12,10 @@
       <a ng-repeat="env in envs" ng-click="selectEnv(env.url, $event)" class="list-group-item" ng-class="{active: env.active}">{{env.url}}</a>
     </div>
 
-    <a class="pull-right" id="settings" href="#" ng-click="loadSettings()"><span class="glyphicon glyphicon-wrench"></span> Options</a>
-    <a class="pull-right" id="addByTemplate" href="#" ng-click="addProject()"><span class="glyphicon glyphicon-plus"></span> Add new environment</a>
+    <div class="pull-right btn-group">
+        <a id="settings" href="#" ng-click="loadSettings()"><span class="glyphicon glyphicon-wrench"></span> Options</a>
+        <a id="addProject" href="#" ng-click="addProject()"><span class="glyphicon glyphicon-plus"></span> Add this</a>
+    </div>
     <div class="clearfix"></div>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
