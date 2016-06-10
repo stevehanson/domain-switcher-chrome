@@ -88,10 +88,12 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', 
 	};
 
 	$scope.init = function() {
-		// via add new environment function
-		if ($location.search().newDomain) {
-			$scope.addProject($location.search().newDomain);
-		}
+		angular.element(document).ready(function () {
+			// via add new environment function
+			if ($location.search().newDomain) {
+				$scope.addProject($location.search().newDomain);
+			}
+		});
 	}
 
 }]);
