@@ -13,18 +13,17 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', 
 		project.envs.push({url: ''});
 	};
 
-	$scope.makeTemplate = function(project) {
-		$scope.projects.forEach(function(value, index) {
-			$scope.projects[index].isTemplate = (project == value);
-		});
+	$scope.addTemplate = function() {
+		var data = { name: '', editMode: true, isTemplate: true, envs: []}
+		$scope.projects.unshift(data);
 	}
+
 	$scope.getTemplate = function() {
 		var templates = $filter('filter')($scope.projects, {isTemplate: true});
 		if (templates.length > 1) {
 			console.error('Multiple templates not supported, taking the first');
 		}
 		if (template = templates.pop()) {
-			console.log('Template found', template);
 			return template;
 		}
 	}
@@ -54,7 +53,8 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', 
 		$scope.projects.unshift(data);
 	};
 
-	$scope.removeProject = function($index) {
+	$scope.removeProject = function($project) {
+		var $index = $scope.projects.indexOf($project);
 		$scope.projects.splice($index, 1);
 	};
 

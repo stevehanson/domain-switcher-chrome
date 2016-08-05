@@ -29,7 +29,6 @@
 
 <section class="main container" ng-controller="ProjectsCtrl" ng-init="init()">
 
-
     <div class="row">
         <div class="col-md-12">
 
@@ -42,7 +41,7 @@
             </div>
 
             <div class="projects-list">
-                <div ng-repeat="project in projects" class="panel panel-default"
+                <div ng-repeat="project in projects | filter: {isTemplate: false}" class="panel panel-default"
                      ng-class="{'panel-default': project.enabled}">
                     <div class="panel-heading" ng-mouseenter="project.showEdit = true"
                          ng-mouseleave="project.showEdit = false">
@@ -50,24 +49,51 @@
                         <span class="panel-title" ng-hide="project.editMode">{{project.name}}</span>
 
                         <span ng-show="project.editMode">
-                        <input type="text" placeholder="New Project Name" ng-model="project.name"
-                               ng-blur="doneEditName(project)"/>
-                        <button ng-if="!project.isTemplate" ng-click="makeTemplate(project)" class="btn btn-xs">
-                            <span class="glyphicon glyphicon-book"></span> Make template
-                        </button>
-                    </span>
-
-                        <span ng-if="project.isTemplate">
-                        <span class="label label-info">This is the template</span>
-                        This template is used to quickly create new projects.
-                        Use <code>$</code> as a placeholder for the live domain, or <code>$$</code> for the live domain without <code>www.</code>.
-                    </span>
+                            <input type="text" placeholder="New Project Name" ng-model="project.name"
+                                   ng-blur="doneEditName(project)"/>
+                        </span>
 
                         <span class="pull-right panel-right-heading">
                         <a href="#" class="panel-heading-link" ng-show="project.showEdit  && !project.editMode"
                            ng-click="editName(project)"><span class="glyphicon glyphicon-edit"></span> edit header</a>
 
-                        <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject($index)"><span
+                        <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject(project)"><span
+                                class="glyphicon glyphicon-remove"></span></a>
+                    </span>
+
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div ng-repeat="env in project.envs" class="col-sm-4 col-md-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Eg: localhost:3000"
+                                           ng-model="env.url">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="addEnv(project)"
+                                            role="button">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Add env
+                                    </button>
+                                </div>
+                            </div>
+                        </div> <!-- row -->
+                    </div> <!-- panel body -->
+                </div> <!-- panel -->
+
+                <div ng-repeat="project in projects | filter: {isTemplate: true}"
+                     class="panel panel-default project-template"
+                     ng-class="{'panel-default': project.enabled}">
+                    <div class="panel-heading">
+                        <span class="label label-info">Template</span>
+                        This template is used to quickly create new projects.
+                        Use <code>$</code> as a placeholder for the live domain, or <code>$$</code> for the live domain
+                        without <code>www.</code>.
+
+                        <span class="pull-right panel-right-heading">
+                        <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject(project)"><span
                                 class="glyphicon glyphicon-remove"></span></a>
                     </span>
 
@@ -99,11 +125,16 @@
     </div> <!-- row -->
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <button type="button" class="btn btn-primary" ng-click="save()" role="button">
                 <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save
             </button>
             <span class="alert alert-success alert-small is-hidden" id="save-success">Save successful</span>
+        </div>
+        <div class="pull-right" ng-if="!getTemplate()">
+            <button class="btn btn-secondary btn-sm" role="button" ng-click="addTemplate()">
+                <span class="glyphicon glyphicon-book"></span> Define a project template
+            </button>
         </div>
     </div>
 
