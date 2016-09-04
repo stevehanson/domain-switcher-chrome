@@ -45,14 +45,12 @@ function checkForValidUrl(tabId, changeInfo, tab) {
   }
   var projects = JSON.parse(data);
   var envs = getEnvsForCurrentUrl(projects, tab.url);
-  if(envs) {
-    chrome.pageAction.show(tabId);
-    chrome.pageAction.setTitle({
-      tabId: tab.id,
-      title: 'url: ' + tab.url
-    });
-    chrome.pageAction.setPopup({tabId: tab.id, popup: 'popup.html'});
-  }
+  chrome.pageAction.show(tabId);
+  chrome.pageAction.setTitle({
+    tabId: tab.id,
+    title: 'url: ' + tab.url
+  });
+  chrome.pageAction.setPopup({tabId: tab.id, popup: 'popup.html'});
 
 }
 

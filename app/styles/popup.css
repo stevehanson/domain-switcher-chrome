@@ -23,10 +23,11 @@ img {
   cursor: pointer;
 }
 
-#settings:focus {
-  outline: none;
+.functions a {
+  padding-left: 1em;
+  text-decoration: none;
 }
 
-#settings {
-  text-decoration: none;
+.functions a:focus {
+  outline: none;
 }
