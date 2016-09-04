@@ -47,6 +47,11 @@
                 <button class="btn btn-primary btn-sm" role="button" ng-click="addProject()">
                     <span class="glyphicon glyphicon-plus-sign"></span> Add project
                 </button>
+
+                <button class="btn btn-info btn-sm" role="button" data-toggle="modal"
+                        ng-click="draftProject()"  ng-if="getTemplate()">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Quick add project
+                </button>
             </div>
 
             <div class="projects-list">
@@ -93,15 +98,18 @@
                 </div> <!-- panel -->
 
                 <div ng-repeat="project in projects | filter: {isTemplate: true}"
-                     class="panel panel-default project-template"
+                     class="panel panel-info project-template"
                      ng-class="{'panel-default': project.enabled}">
                     <div class="panel-heading">
-                        <span class="label label-info">Template</span>
+                        <h3 class="panel-title">Quick-add Template</h3>
+
+                        (Use <code>$</code> as a placeholder for the main domain, or <code>$$</code> for the main domain
+                        without <code>www.</code>)
 
                         <span class="pull-right panel-right-heading">
                         <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject(project)"><span
                                 class="glyphicon glyphicon-remove"></span></a>
-                    </span>
+                        </span>
 
                     </div>
                     <div class="panel-body">
@@ -137,18 +145,75 @@
             <span class="alert alert-success alert-small is-hidden" id="save-success">Save successful</span>
         </div>
         <div class="pull-right" ng-if="!getTemplate()">
-            <button class="btn btn-secondary btn-sm" role="button" ng-click="addTemplate()">
+            <button class="btn btn-info btn-sm" role="button" ng-click="addTemplate()">
                 <span class="glyphicon glyphicon-book"></span> Define a project template
             </button>
         </div>
     </div>
 
+    <!-- Modal Create from Template -->
+    <div class="modal fade" id="draftModal" tabindex="-1" role="dialog" aria-labelledby="draftModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="draftModalLabel">Quick add project</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default project-template">
+                        <div class="panel-heading">
+                            Main Domain
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" placeholder="Eg: thisislive-example.com" ng-model="draftingProject.mainDomain"
+                                        ng-change="updateDraft()"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default project-template">
+                        <div class="panel-heading">
+                            <span class="label label-info">Draft</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div ng-repeat="env in draftingProject.envs" class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="{{ templateSamples[$index] }}"
+                                               ng-model="env.url">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="addEnv(draftingProject)"
+                                                role="button">
+                                            <span class="glyphicon glyphicon-plus-sign"></span> Add env
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> <!-- row -->
+                        </div> <!-- panel body -->
+                    </div> <!-- panel -->            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="submitDraft()">Create project</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="scripts/options.js"></script>
 
 </body>
 </html>
+
+

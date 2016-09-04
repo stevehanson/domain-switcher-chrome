@@ -34,6 +34,67 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', 
 		}
 	}
 
+	/**
+	 * Start drafting a new project
+	 * If mainDomain
+	 */
+	$scope.draftProject = function(domain) {
+		var data = { name: '', editMode: true, isTemplate: false, envs: []};
+		data.envs = angular.copy($scope.getTemplate().envs);
+
+		$(draftModal).modal().show();
+
+		$scope.draftingProject = data;
+
+		if (domain) {
+
+			// detect main domain (if matching any pattern, longest string first)
+			var envs = angular.copy($scope.getTemplate().envs);
+			envs.sort(function(a, b){
+				return b.url.length - a.url.length;
+			});
+			envs.some(function(env) {
+				var pattern = env.url.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\|]/g, "\\$&");
+				pattern = pattern.replace('$$', "(.*)");
+				pattern = pattern.replace('$', "(.*)");
+				var matches = domain.match(pattern);
+				if (matches) {
+					domain = matches[1];
+					return true;
+				}
+			});
+
+			$scope.draftingProject.mainDomain = domain;
+			$scope.updateDraft();
+		}
+	};
+
+	/**
+	 * Update a draft's data (regenerate final URLs based on mainDomain)
+     */
+	$scope.updateDraft = function()
+	{
+		var liveDomain = $scope.draftingProject.mainDomain;
+		var i = 0;
+		template = $scope.getTemplate();
+		template.envs.forEach(function(value) {
+			var templateUrl = value.url;
+			var generatedUrl = templateUrl.replace("$$", liveDomain.replace('www.', ''));
+			generatedUrl = generatedUrl.replace("$", liveDomain);
+			$scope.draftingProject.envs[i].url = generatedUrl;
+			i++;
+		});
+	}
+
+	/**
+	 * Add the current draft as new project and reset draft
+     */
+	$scope.submitDraft = function() {
+		$(draftModal).modal('hide');
+		$scope.projects.unshift(angular.copy($scope.draftingProject));
+		$scope.draftingProject = null;
+	}
+
 	$scope.addProject = function(liveDomain) {
 		var data = { name: '', editMode: true, isTemplate: false, envs: []}
 		var template = $scope.getTemplate();
@@ -96,9 +157,11 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', 
 	$scope.init = function() {
 		angular.element(document).ready(function () {
 			// via add new environment function
-			if ($location.search().newDomain) {
-				$scope.addProject($location.search().newDomain);
-			}
+			$scope.$apply(function() {
+				if ($location.search().newDomain) {
+					$scope.draftProject($location.search().newDomain);
+				}
+			});
 		});
 	}
 
