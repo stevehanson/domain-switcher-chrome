@@ -34,7 +34,11 @@ app.controller('UrlsCtrl', ['$rootScope', '$scope', function($rootScope, $scope)
 		if(url.indexOf('://') == -1) {
 			url = 'http://' + url;
 		}
-		return chrome.extension.getBackgroundPage().urlsMatch($scope.url, new Uri(url));
+		var uri = new Uri(url);
+		if(uri.path() === '') {
+			uri.path('/'); // avoid matching domains which start like another
+		}
+		return chrome.extension.getBackgroundPage().urlsMatch($scope.url, uri);
 	};
 
 	$scope.updateActive = function() {
