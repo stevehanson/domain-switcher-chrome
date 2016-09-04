@@ -25,6 +25,15 @@
     </p>
 
     <p>It is recommended you leave off "http://" as it will be ignored anyway.</p>
+
+    <p>
+        A Template can be used to quickly create new projects.
+        Use <code>$</code> as a placeholder for the main domain, or <code>$$</code> for the main domain
+        without <code>www.</code>.
+        When you create a new project and a template is defined, you are prompted for the main domain and the other envs will be
+        completed according to your schema. You can also use the "+ Add This" button in the drop down menu
+        of any web page, to quickly add environments based on the current domain.
+    </p></p>
 </header>
 
 <section class="main container" ng-controller="ProjectsCtrl" ng-init="init()">
@@ -88,22 +97,18 @@
                      ng-class="{'panel-default': project.enabled}">
                     <div class="panel-heading">
                         <span class="label label-info">Template</span>
-                        This template is used to quickly create new projects.
-                        Use <code>$</code> as a placeholder for the live domain, or <code>$$</code> for the live domain
-                        without <code>www.</code>.
 
                         <span class="pull-right panel-right-heading">
                         <a href="#" class="panel-heading-link rem-proj" ng-click="removeProject(project)"><span
                                 class="glyphicon glyphicon-remove"></span></a>
                     </span>
 
-
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div ng-repeat="env in project.envs" class="col-sm-4 col-md-3">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Eg: localhost:3000"
+                                    <input type="text" class="form-control" placeholder="{{ templateSamples[$index] }}"
                                            ng-model="env.url">
                                 </div>
                             </div>

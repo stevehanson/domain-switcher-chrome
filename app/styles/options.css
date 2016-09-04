@@ -30,3 +30,15 @@ a.rem-proj {
 .is-hidden {
 	display: none;
 }
+
+.examples input {
+	font-size: 10px;
+}
+
+.examples input:nth-child(1) {
+	width: 4em;
+}
+
+.examples input:nth-child(1) {
+	width: 10em;
+}

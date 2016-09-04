@@ -3,6 +3,11 @@ var app = angular.module('angOptions', []);
 
 app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', function($rootScope, $scope, $filter, $location) {
 	var data = localStorage['domainSwitcher'];
+
+	$scope.templateSamples = ['Eg: $', 'Eg: $$.staging.example.com', 'Eg: localhost/$', 'Eg: $$.testing.example.com',
+		'Eg: $.something.example.com', 'Eg: $.somedeveloper.example.com', 'Eg: test-at-live.$', 'no more examples',
+		'really', 'stop it', 'thanks'];
+
 	if(data != null) {
 		$scope.projects = JSON.parse(data);
 	} else {
@@ -14,7 +19,8 @@ app.controller('ProjectsCtrl', ['$rootScope', '$scope', '$filter', '$location', 
 	};
 
 	$scope.addTemplate = function() {
-		var data = { name: '', editMode: true, isTemplate: true, envs: []}
+		var data = { name: '', editMode: true, isTemplate: true,
+			envs: [ { url: '' }, { url: '' }, { url: '' } ]}; // Show 3 samples
 		$scope.projects.unshift(data);
 	}
 
